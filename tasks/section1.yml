@@ -704,7 +704,7 @@
     - name: "SECTION1 | 1.4.1 | Ensure bootloader password is set | generate config"
       ansible.builtin.copy:
         dest: /etc/grub.d/00_password
-        content: "cat << EOF\nexec tail -n +2 $0\nset superusers=\"root\"\npassword_pbkdf2 root {{ cis_ubuntu2404_grub_bootloader_password.stdout }}\nEOF"
+        content: "cat << EOF\nexec tail -n +2 $0\nset superusers=\"{{ ansible_user }}\"\npassword_pbkdf2 {{ ansible_user }} {{ cis_ubuntu2404_grub_bootloader_password.stdout }}\nEOF"
         owner: "{{ cis_ubuntu2404_section1_owner_default }}"
         group: "{{ cis_ubuntu2404_section1_group_default }}"
         mode: "{{ cis_ubuntu2404_section1_mode_etc_grub_d }}"
