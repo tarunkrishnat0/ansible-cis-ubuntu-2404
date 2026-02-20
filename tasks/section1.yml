@@ -699,8 +699,8 @@
         content: |
           #!/bin/sh
           cat << 'EOF'
-          set superusers="root"
-          password_pbkdf2 root {{ cis_ubuntu2404_grub_bootloader_password.stdout }}
+          set superusers="{{ ansible_user }}"
+          password_pbkdf2 {{ ansible_user }} {{ cis_ubuntu2404_grub_bootloader_password.stdout }}
           EOF
         owner: "{{ cis_ubuntu2404_section1_owner_default }}"
         group: "{{ cis_ubuntu2404_section1_group_default }}"
